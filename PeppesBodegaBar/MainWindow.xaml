@@ -1,0 +1,33 @@
+﻿<Window x:Class="PeppesBodegaBar.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PeppesBodegaBar"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="1100">
+    <Grid Margin="0,-2,-380.8,-3.2" Height="326" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1164">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="721*"/>
+            <ColumnDefinition Width="33*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ListBoxGuest" HorizontalAlignment="Left" Height="100" Margin="21,59,0,0" VerticalAlignment="Top" Width="245"/>
+        <Button x:Name="ButtonPauseGuest" Content="Pausa" HorizontalAlignment="Left" Margin="21,168,0,0" VerticalAlignment="Top" Width="245" FontWeight="Bold" FontSize="10" Height="23" IsEnabled="False" Click="ButtonPauseGuest_Click"/>
+        <Label x:Name="LabelGuest" Content="Gäster" HorizontalAlignment="Left" Margin="21,33,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"/>
+        <TextBox x:Name="TextBoxNrGuest" HorizontalAlignment="Left" Height="23" Margin="24,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
+        <Label x:Name="LabelNrGuestText" Content="Antal/&#xA;Insläpp" HorizontalAlignment="Left" Margin="56,196,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <ListBox x:Name="ListBoxBartender" HorizontalAlignment="Left" Height="100" Margin="285,59,0,0" VerticalAlignment="Top" Width="245"/>
+        <Label x:Name="LabelBartender" Content="Bartender" HorizontalAlignment="Left" Margin="287,33,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ListBox x:Name="ListBoxWaitress" HorizontalAlignment="Left" Height="100" Margin="556,59,0,0" VerticalAlignment="Top" Width="245" FontSize="10"/>
+        <Label x:Name="Servitör" Content="Servitör" HorizontalAlignment="Left" Margin="556,33,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
+        <Label x:Name="LabelNrGuset" Content="" HorizontalAlignment="Left" Margin="818,59,0,0" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="2"/>
+        <Button x:Name="ButtonOpenCloseBar" Content="Öppna baren..." Margin="21,265,0,0" VerticalAlignment="Top" FontWeight="Bold" Click="ButtonOpenCloseBar_Click" HorizontalAlignment="Left" Width="685" Height="38"/>
+        <TextBox x:Name="TextBoxOpenBarInSek" HorizontalAlignment="Left" Height="19" Margin="736,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41"/>
+        <Label x:Name="LabelOpenBarNrSek" Content="Baren öppen i Sek" HorizontalAlignment="Left" Margin="711,252,0,0" VerticalAlignment="Top" FontSize="10"/>
+        <TextBox x:Name="TextBoxTimeGuest" HorizontalAlignment="Left" Height="23" Margin="119,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25"/>
+        <Label x:Name="LabelNrGuestText_Copy" Content="Sek/&#xA;Insläpp" HorizontalAlignment="Left" Margin="155,196,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <Label x:Name="LabelBarInventory" Content="Bar Inventory" HorizontalAlignment="Left" Margin="818,28,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
+        <Button x:Name="ButtoStopTasks" Content="Stoppa alla trådar" HorizontalAlignment="Left" Margin="818,265,0,0" VerticalAlignment="Top" Width="204" Height="38" FontFamily="Segoe UI" Foreground="#FFC2083D" FontWeight="Bold" Click="ButtonStopTasks_Click"/>
+
+    </Grid>
+</Window>
