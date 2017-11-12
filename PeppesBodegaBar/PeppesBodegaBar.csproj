@@ -56,6 +56,8 @@
     </ApplicationDefinition>
     <Compile Include="BarQue.cs" />
     <Compile Include="PubTimer.cs" />
+    <Compile Include="Waitress.cs" />
+    <Compile Include="WpfItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
