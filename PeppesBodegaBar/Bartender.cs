@@ -25,7 +25,7 @@ namespace PeppesBodegaBar
                         alaive = false;
                     }
 
-                    Thread.Sleep(3000); //Häller upp öl, 3 sek
+                    Thread.Sleep(50); 
                 }
 
             });

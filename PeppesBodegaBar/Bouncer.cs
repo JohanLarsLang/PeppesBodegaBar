@@ -20,8 +20,6 @@ namespace PeppesBodegaBar
 {
     public class Bouncer
     {
-        public BlockingCollection<Patron> patronBarQue { get; set; }
-
         List<string> patronNameList = new List<string> {
             "Anders", "Johan L", "Tommy", "Jari",
             "Pontus", "David", "Johanna", "Erik",
@@ -31,13 +29,32 @@ namespace PeppesBodegaBar
 
         Random rnd = new Random();
 
+        public Patron getRandomPatron()
+        {
+            int nr = rnd.Next(0, 19); //Slumpat namn av gäster
+            Patron patron = new Patron(patronNameList[nr]);
+            return patron;
+        }
+
+        public int NrOfGuest  { get; set; }
+
+        public void nrOfGuest(int nrofguest = 1)
+        {
+            NrOfGuest = nrofguest;
+        }
+
+        public int GetNrOfGuest()
+        {
+            return NrOfGuest;
+        }
+
         public BlockingCollection<Patron> getRandomPatronName(int nrPatron)
         {
             BlockingCollection<Patron> patronsList = new BlockingCollection<Patron>();
             //List<Patron> patronsList = new List<Patron>();
 
             for (int i = 0; i < nrPatron; i++)
-            { 
+            {
 
                 Task.Run(() =>
                 {
@@ -45,10 +62,10 @@ namespace PeppesBodegaBar
                     Patron patron = new Patron(patronNameList[nrPatron]);
                     patronsList.Add(patron);
                 });
-                                  
+
             }
 
-           return patronsList;
+            return patronsList;
         }
 
         public void PubIsClosing()

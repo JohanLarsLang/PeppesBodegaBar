@@ -11,23 +11,31 @@
             <ColumnDefinition Width="721*"/>
             <ColumnDefinition Width="33*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="ListBoxGuest" HorizontalAlignment="Left" Height="100" Margin="21,59,0,0" VerticalAlignment="Top" Width="245"/>
-        <Button x:Name="ButtonPauseGuest" Content="Pausa" HorizontalAlignment="Left" Margin="21,168,0,0" VerticalAlignment="Top" Width="245" FontWeight="Bold" FontSize="10" Height="23" IsEnabled="False" Click="ButtonPauseGuest_Click"/>
-        <Label x:Name="LabelGuest" Content="Gäster" HorizontalAlignment="Left" Margin="21,33,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"/>
-        <TextBox x:Name="TextBoxNrGuest" HorizontalAlignment="Left" Height="23" Margin="24,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
-        <Label x:Name="LabelNrGuestText" Content="Antal/&#xA;Insläpp" HorizontalAlignment="Left" Margin="56,196,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
-        <ListBox x:Name="ListBoxBartender" HorizontalAlignment="Left" Height="100" Margin="285,59,0,0" VerticalAlignment="Top" Width="245"/>
-        <Label x:Name="LabelBartender" Content="Bartender" HorizontalAlignment="Left" Margin="287,33,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ListBox x:Name="ListBoxWaitress" HorizontalAlignment="Left" Height="100" Margin="556,59,0,0" VerticalAlignment="Top" Width="245" FontSize="10"/>
-        <Label x:Name="Servitör" Content="Servitör" HorizontalAlignment="Left" Margin="556,33,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
-        <Label x:Name="LabelNrGuset" Content="" HorizontalAlignment="Left" Margin="818,59,0,0" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="2"/>
-        <Button x:Name="ButtonOpenCloseBar" Content="Öppna baren..." Margin="21,265,0,0" VerticalAlignment="Top" FontWeight="Bold" Click="ButtonOpenCloseBar_Click" HorizontalAlignment="Left" Width="685" Height="38"/>
-        <TextBox x:Name="TextBoxOpenBarInSek" HorizontalAlignment="Left" Height="19" Margin="736,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41"/>
-        <Label x:Name="LabelOpenBarNrSek" Content="Baren öppen i Sek" HorizontalAlignment="Left" Margin="711,252,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <TextBox x:Name="TextBoxTimeGuest" HorizontalAlignment="Left" Height="23" Margin="119,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25"/>
-        <Label x:Name="LabelNrGuestText_Copy" Content="Sek/&#xA;Insläpp" HorizontalAlignment="Left" Margin="155,196,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
-        <Label x:Name="LabelBarInventory" Content="Bar Inventory" HorizontalAlignment="Left" Margin="818,28,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
-        <Button x:Name="ButtoStopTasks" Content="Stoppa alla trådar" HorizontalAlignment="Left" Margin="818,265,0,0" VerticalAlignment="Top" Width="204" Height="38" FontFamily="Segoe UI" Foreground="#FFC2083D" FontWeight="Bold" Click="ButtonStopTasks_Click"/>
+        <ListBox x:Name="ListBoxGuest" HorizontalAlignment="Left" Height="100" Margin="21,72,0,0" VerticalAlignment="Top" Width="245"/>
+        <Button x:Name="ButtonPauseGuest" Content="Pausa" HorizontalAlignment="Left" Margin="21,181,0,0" VerticalAlignment="Top" Width="245" FontWeight="Bold" FontSize="10" Height="23" IsEnabled="False" Click="ButtonPauseGuest_Click"/>
+        <Label x:Name="LabelGuest" Content="Gäster" HorizontalAlignment="Left" Margin="21,46,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"/>
+        <TextBox x:Name="TextBoxNrGuest" HorizontalAlignment="Left" Height="23" Margin="21,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
+        <Label x:Name="LabelNrGuestText" Content="Antal/&#xA;Insläpp" HorizontalAlignment="Left" Margin="56,209,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <ListBox x:Name="ListBoxBartender" HorizontalAlignment="Left" Height="100" Margin="285,72,0,0" VerticalAlignment="Top" Width="245"/>
+        <Label x:Name="LabelBartender" Content="Bartender" HorizontalAlignment="Left" Margin="287,46,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ListBox x:Name="ListBoxWaitress" HorizontalAlignment="Left" Height="100" Margin="556,72,0,0" VerticalAlignment="Top" Width="245"/>
+        <Label x:Name="Servitör" Content="Servitör" HorizontalAlignment="Left" Margin="556,46,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
+        <Label x:Name="LabelNrGuset" Content="" HorizontalAlignment="Left" Margin="818,72,0,0" VerticalAlignment="Top" Width="218"/>
+        <Button x:Name="ButtonOpenCloseBar" Content="Öppna baren..." Margin="21,278,0,0" VerticalAlignment="Top" FontWeight="Bold" Click="ButtonOpenCloseBar_Click" HorizontalAlignment="Left" Width="685" Height="38"/>
+        <TextBox x:Name="TextBoxOpenBarInSek" HorizontalAlignment="Left" Height="19" Margin="736,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41"/>
+        <Label x:Name="LabelOpenBarNrSek" Content="Baren öppen i Sek" HorizontalAlignment="Left" Margin="711,265,0,0" VerticalAlignment="Top" FontSize="10"/>
+        <TextBox x:Name="TextBoxTimeGuest" HorizontalAlignment="Left" Height="23" Margin="119,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25"/>
+        <Label x:Name="LabelNrGuestText_Copy" Content="Sek/&#xA;Insläpp" HorizontalAlignment="Left" Margin="155,209,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <Label x:Name="LabelBarInventory" Content="Bar Inventory" HorizontalAlignment="Left" Margin="818,41,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
+        <Button x:Name="ButtoStopTasks" Content="Stoppa alla trådar" HorizontalAlignment="Left" Margin="818,278,0,0" VerticalAlignment="Top" Width="204" Height="38" FontFamily="Segoe UI" Foreground="#FFC2083D" FontWeight="Bold" Click="ButtonStopTasks_Click"/>
+        <Button x:Name="ButtonPauseBartender" Content="Pausa" HorizontalAlignment="Left" Margin="287,181,0,0" VerticalAlignment="Top" Width="243" FontWeight="Bold" FontSize="10" Height="23" IsEnabled="False" Click="ButtonPauseBartender_Click"/>
+        <Label x:Name="LabelAntalGlasText" Content="Antal glas i baren" HorizontalAlignment="Left" Margin="321,219,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <TextBox x:Name="TextBoxAntalGlas" HorizontalAlignment="Left" Height="23" Margin="287,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
+        <Label x:Name="LabelAntalGlas" Content="" HorizontalAlignment="Left" Margin="818,109,0,0" VerticalAlignment="Top" Width="218"/>
+        <Button x:Name="ButtonPauseWaiter" Content="Pausa" HorizontalAlignment="Left" Margin="558,181,0,0" VerticalAlignment="Top" Width="243" FontWeight="Bold" FontSize="10" Height="23" IsEnabled="False" Click="ButtonPauseWaiter_Click"/>
+        <TextBox x:Name="TextBoxAntalStolar" HorizontalAlignment="Left" Height="23" Margin="558,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
+        <Label x:Name="LabelAntalStolarText" Content="Antal stolar i baren" HorizontalAlignment="Left" Margin="596,219,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <Label x:Name="LabelAntalStolar" Content="" HorizontalAlignment="Left" Margin="818,146,0,0" VerticalAlignment="Top" Width="218"/>
 
     </Grid>
 </Window>

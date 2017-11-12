@@ -9,13 +9,17 @@ namespace PeppesBodegaBar
 {
     public class BarQue
     {
-        public BlockingCollection<Patron> patronBarQue { get; set; }
+        public BlockingCollection<Patron> PatronBarQue { get; set; }
 
-        public Patron FirstPatronInBarQue()
+        public void AddPatronInBarQue(Patron patron)
         {
-            //if (patronBarQue  != null)
-            return patronBarQue.Last();
-            //set { patronBarQue = value; }
+            PatronBarQue.Add(patron);
+        }
+
+        public BlockingCollection<Patron> GetpatronBarQue
+        {
+            get { return PatronBarQue; }
+            set { PatronBarQue = value; }
         }
     }
 }
