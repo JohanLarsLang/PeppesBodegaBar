@@ -36,17 +36,15 @@ namespace PeppesBodegaBar
             return patron;
         }
 
-        public int NrOfGuest  { get; set; }
+        public int NrOfGuest { get; set; }
 
-        public void nrOfGuest(int nrofguest = 1)
+        public int GetSetNrOfGuest
         {
-            NrOfGuest = nrofguest;
+            get { return NrOfGuest; }
+            set { NrOfGuest = value; }
         }
 
-        public int GetNrOfGuest()
-        {
-            return NrOfGuest;
-        }
+
 
         public BlockingCollection<Patron> getRandomPatronName(int nrPatron)
         {
