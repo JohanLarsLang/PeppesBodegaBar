@@ -22,12 +22,16 @@ namespace PeppesBodegaBar
     {
         private void SafeInsertTextToListBox(ListBox lb, string str)
         {
-            //Dispatcher.Invoke(() =>
-            {
-                lb.Items.Insert(0, str);
+            Task.Run(() => {
+               // Dispatcher.Invoke(() =>
+                {
+                    lb.Items.Insert(0, str);
 
-            };
-            
+                };
+
+            });
+
+
         }
     }
 }
