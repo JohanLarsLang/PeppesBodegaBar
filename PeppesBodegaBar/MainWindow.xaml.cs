@@ -1,4 +1,4 @@
-﻿//Lab 6, Johan Lång     Göteborg 171115
+﻿//C# Lab 6 , Johan Lång     Göteborg 171115
 
 using System;
 using System.Collections.Generic;
