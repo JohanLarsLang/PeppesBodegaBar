@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Lab 6, Johan Lång     Göteborg 171115
+
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -32,11 +34,14 @@ namespace PeppesBodegaBar
 
             //Varaibles
             TextBoxNrGuest.Text = "1";
-            TextBoxOpenBarInSek.Text = "45";
+            TextBoxOpenBarInSek.Text = "120";
             TextBoxTimeGuest.Text = "";
 
-            TextBoxAntalGlas.Text = "2";
-            TextBoxAntalStolar.Text = "3";
+            TextBoxAntalGlas.Text = "8";
+            TextBoxAntalStolar.Text = "9";
+
+            TextBoxPlockaGlasTid.Text = "10";
+            TextBoxDiskaGlasTid.Text = "15";
         }
 
         private bool openBarStatus = false;
@@ -44,15 +49,15 @@ namespace PeppesBodegaBar
         private bool pauseTaskBartender = true;
         private bool pauseTaskWaiter = true;
         private bool pauseAllTask = true;
+        private bool bouncherWork = true;
+
 
         public int nrGusetIntoBar = 1;
         public int patronCounter = 0;  //Antalet gäster i baren
 
-        //BlockingCollection<Patron> queBar = new BlockingCollection<Patron>();
-
-        List<Patron> queBar = new List<Patron>();
-        List<Patron> queChair = new List<Patron>();
-        List<Patron> queBarLeave = new List<Patron>();
+        BlockingCollection<Patron> queBar = new BlockingCollection<Patron>();
+        BlockingCollection<Patron> queChair = new BlockingCollection<Patron>();
+        BlockingCollection<Patron> queBarLeave = new BlockingCollection<Patron>();
 
         private void ButtonOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
@@ -73,8 +78,14 @@ namespace PeppesBodegaBar
                 int antalGlas = int.Parse(TextBoxAntalGlas.Text);
                 int antalStolar = int.Parse(TextBoxAntalStolar.Text);
 
-                string antalGlasStart = TextBoxAntalGlas.Text;
-                string antalStolarStart = TextBoxAntalStolar.Text;
+                int plockaGlasSek = int.Parse(TextBoxPlockaGlasTid.Text);
+                int diskaGlasSek = int.Parse(TextBoxDiskaGlasTid.Text);
+
+                //StartSetting startsetting = new StartSetting();
+
+                //startsetting.AntalGlasStart = TextBoxAntalGlas.Text;
+
+                //string antalStolarStart = TextBoxAntalStolar.Text;
 
                 string sekNrGuset = TextBoxTimeGuest.Text;
 
@@ -94,6 +105,8 @@ namespace PeppesBodegaBar
                     TextBoxNrGuest.IsEnabled = false;
                     TextBoxAntalGlas.IsEnabled = false;
                     TextBoxAntalStolar.IsEnabled = false;
+                    TextBoxPlockaGlasTid.IsEnabled = false;
+                    TextBoxDiskaGlasTid.IsEnabled = false;
                 });
 
                 //bartender.GiveBeer = queBar[0].ResiveBeer;
@@ -120,49 +133,49 @@ namespace PeppesBodegaBar
                      {
                          while (pauseTaskGuest)
                          {
-                             int sekIntoBar = 1;
-
-                             Random rndSek = new Random();
-                             if (sekNrGuset == "")
+                             if (bouncherWork != false)
                              {
-                                 sekIntoBar = rndSek.Next(3, 11);
-                             }
-                             else
-                             {
-                                 sekIntoBar = int.Parse(sekNrGuset);
-                             }
+                                 int sekIntoBar = 1;
 
-                             Thread.Sleep(sekIntoBar * 1000);  //Släpper in ny gäst efter 3 - 10sek
-
-                             //nrGusetIntoBar = bouncher.GetNrOfGuest();
-
-                             for (int i = 0; i < nrGusetIntoBar; i++)
-                             {
-                                 ++patronCounter;
-                                 Patron patron = bouncher.getRandomPatron();
-                                 queBar.Add(patron);
-                                 //barque.AddPatronInBarQue(patron);
-
-                                 string strListBox = $"{patronCounter}_{patron.Name} kommer in och går till baren";
-
-                                 SafeInsertTextToListBox(ListBoxGuest, strListBox);
-
-                                 string strLabel = "";
-                                 if (patronCounter == 1)
+                                 Random rndSek = new Random();
+                                 if (sekNrGuset == "")
                                  {
-                                     strLabel = $"Det finns {patronCounter} gäst i baren";
+                                     sekIntoBar = rndSek.Next(3, 11);
                                  }
                                  else
                                  {
-                                     strLabel = $"Det finns {patronCounter} gäster i baren";
+                                     sekIntoBar = int.Parse(sekNrGuset);
                                  }
 
-                                 SafeSetTextToLabel(LabelNrGuset, strLabel);
+                                 Thread.Sleep(sekIntoBar * 1000);  //Släpper in ny gäst efter 3 - 10sek
 
-                                 Thread.Sleep(1000); //Går till baren
+                                 //nrGusetIntoBar = bouncher.GetNrOfGuest();
 
+                                 for (int i = 0; i < nrGusetIntoBar; i++)
+                                 {
+                                     ++patronCounter;
+                                     Patron patron = bouncher.getRandomPatron();
+                                     queBar.Add(patron);
+
+                                     string strListBox = $"{patronCounter}_{patron.Name} kommer in och går till baren";
+
+                                     SafeInsertTextToListBox(ListBoxGuest, strListBox);
+
+                                     string strLabel = "";
+                                     if (patronCounter == 1)
+                                     {
+                                         strLabel = $"Det finns {patronCounter} gäst i baren";
+                                     }
+                                     else
+                                     {
+                                         strLabel = $"Det finns {patronCounter} gäster i baren";
+                                     }
+
+                                     SafeSetTextToLabel(LabelNrGuset, strLabel);
+
+                                     Thread.Sleep(1000); //Går till baren
+                                 }
                              }
-
                          }
                      }
                  });
@@ -177,22 +190,18 @@ namespace PeppesBodegaBar
                     SafeSetTextToLabel(LabelAntalGlas, antalGlasText);
                     SafeInsertTextToListBox(ListBoxBartender, bartenderTextWait);
 
-                    string antalStolarText = $"Det finns {antalStolar} antal stolar i baren";
-                    SafeSetTextToLabel(LabelAntalStolar, antalStolarText);
-
-
                     while (pauseTaskBartender)
                     {
                         if (queBar.Count > 0 && antalGlas > 0)
                         {
-                            Patron firstPatron = queBar[0];
-                            queBar.RemoveAt(0);
+                            Patron firstPatron = queBar.Take(1).First();
+                            queBar.Take();
 
                             string patronText = $"{counterBartender}_{firstPatron.Name}: En stor stark öl tack!";
                             counterBartender++;
 
                             SafeInsertTextToListBox(ListBoxBartender, patronText);
-                            Thread.Sleep(2000);
+                            Thread.Sleep(1000);
 
                             string bartenderTextPick = $"{counterBartender}_Bartender hämtar glas";
                             counterBartender++;
@@ -207,8 +216,8 @@ namespace PeppesBodegaBar
                             counterBartender++;
                             SafeInsertTextToListBox(ListBoxBartender, bartenderTextBeer);
                             Thread.Sleep(3000);
-                            queChair.Add(firstPatron);
 
+                            queChair.Add(firstPatron);
 
                             if (antalGlas == 0)
                             {
@@ -216,52 +225,89 @@ namespace PeppesBodegaBar
                                 string bartenderTextWaitForGlas = $"{counterBartender}_Bartender väntar på rent glas";
                                 counterBartender++;
                                 SafeInsertTextToListBox(ListBoxBartender, bartenderTextWaitForGlas);
-
                             }
                         }
                     }
-                    //}
-
                 });
 
                 //Gäst letar stol, dricker öl och lämnar baren
                 Task.Run(() =>
                 {
+                    string antalStolarText = $"Det finns {antalStolar} antal stolar i baren";
+                    SafeSetTextToLabel(LabelAntalStolar, antalStolarText);
+
                     int counterBeer = 1;
-                    Thread.Sleep(8500);
 
-                    while (pauseTaskGuest)
+                    while (pauseTaskWaiter)
                     {
-                        if (queChair.Count > 0 && antalStolar > 0)
+                        if (queChair.Count > 0 )
                         {
-                            Patron beerPatron = queChair[0];
-                            queChair.RemoveAt(0);
+                            if (antalStolar == 0)
+                            {
+                                counterBeer++;
+                                string patronTextNoChair = $"{counterBeer}_Inga lediga stolar";
+                                SafeInsertTextToListBox(ListBoxWaitress, patronTextNoChair);
+                                SafeSetTextToTextBox(TextBoxAntalStolar, antalStolar.ToString());
+                            }
 
-                            string patronTextFindChair = $"{counterBeer}_{beerPatron.Name}: Letar efter ledig stol";
-                            antalStolar--;
-                            counterBeer++;
+                            else if (antalStolar > 0)
+                            {
+                            
+                                Patron beerPatron = queChair.Take(1).First();
+                                queChair.Take();
 
-                            SafeInsertTextToListBox(ListBoxGuest, patronTextFindChair);
+                                string patronTextFindChair = $"{counterBeer}_{beerPatron.Name}: Letar efter ledig stol";
+                                --antalStolar;
+                                counterBeer++;
+
+                                SafeInsertTextToListBox(ListBoxWaitress, patronTextFindChair);
+                                SafeSetTextToTextBox(TextBoxAntalStolar, antalStolar.ToString());
+                                antalStolarText = $"Det finns {antalStolar} antal stolar i baren";
+                                SafeSetTextToLabel(LabelAntalStolar, antalStolarText);
+                                Thread.Sleep(4000);
+
+                                string patronTextDrinkBeer = $"{counterBeer}_{beerPatron.Name}: Dricker öl!";
+                                counterBeer++;
+
+                                SafeInsertTextToListBox(ListBoxWaitress, patronTextDrinkBeer);
+                                Random rndDrinkBeer = new Random();
+                                int drinkBeerSek = rndDrinkBeer.Next(10, 21);
+                                Thread.Sleep(drinkBeerSek * 1000);
+
+                                queBarLeave.Add(beerPatron);
+                            }
+                        }
+                    }
+                });
+
+                //Servitör väntar på gäster, plockar glas från bord, diskar och ställer dem i baren
+
+                Task.Run(() =>
+                {
+                    int counterWaiter = 1;
+                    string waiterTextWait = $"{counterWaiter}_Servitrisen väntar på besökare";
+                    counterWaiter++;
+
+                    SafeInsertTextToListBox(ListBoxWaitress, waiterTextWait);
+
+                    while (pauseTaskWaiter)
+                    {
+                        if (queBarLeave.Count > 0)
+                        {
+                            Patron leavePatron = queBarLeave.Take(1).First();
+                            queBarLeave.Take();
+
+                            string patronTextLeave = $"{counterWaiter}_{leavePatron.Name}: Lämnar baren!";
+                            counterWaiter++;
+                            patronCounter--;
+
+                            ++antalStolar;
                             SafeSetTextToTextBox(TextBoxAntalStolar, antalStolar.ToString());
                             string antalStolarText = $"Det finns {antalStolar} antal stolar i baren";
                             SafeSetTextToLabel(LabelAntalStolar, antalStolarText);
-                            Thread.Sleep(4000);
-
-                            string patronTextDrinkBeer = $"{counterBeer}_{beerPatron.Name}: Dricker öl!";
-                            counterBeer++;
-
-                            SafeInsertTextToListBox(ListBoxGuest, patronTextDrinkBeer);
-                            Random rndDrinkBeer = new Random();
-                            int drinkBeerSek = rndDrinkBeer.Next(10, 21);
-                            Thread.Sleep(drinkBeerSek * 1000);
-
-                            string patronTextLeave = $"{counterBeer}_{beerPatron.Name}: Lämnar baren!";
-                            counterBeer++;
-                            patronCounter--;
-                            queBarLeave.Add(beerPatron);
 
 
-                            SafeInsertTextToListBox(ListBoxGuest, patronTextLeave);
+                            SafeInsertTextToListBox(ListBoxWaitress, patronTextLeave);
 
                             string strLabel = "";
                             if (patronCounter == 1)
@@ -275,49 +321,15 @@ namespace PeppesBodegaBar
 
                             SafeSetTextToLabel(LabelNrGuset, strLabel);
 
-                            if (antalStolar == 0)
-                            {
-
-                                string patronTextNoChair = $"{counterBeer}_Inga lediga stolar";
-                                counterBeer++;
-                                SafeInsertTextToListBox(ListBoxGuest, patronTextNoChair);
-                                SafeSetTextToTextBox(TextBoxAntalStolar, antalStolar.ToString());
-                            }
-
-                        }
-                    }
-
-                });
-
-
-
-                //Servitör väntar på gäster, plockar glas från bord, diskar och ställer dem i baren
-
-                Task.Run(() =>
-                {
-                    int counterWaiter = 1;
-                    string waiterTextWait = $"{counterWaiter}_Servitrisen väntar på besökare";
-                    counterWaiter++;
-
-                    SafeInsertTextToListBox(ListBoxWaitress, waiterTextWait);
-
-                    Thread.Sleep(16500);
-
-                    while (pauseTaskWaiter)
-                    {
-                        if (queBarLeave.Count > 0)
-                        {
-                            Patron leavePatron = queBarLeave[0];
-                            queBarLeave.RemoveAt(0);
                             string waiterTextPickGlas = $"{counterWaiter}_Plockar glas från bord";
                             counterWaiter++;
                             SafeInsertTextToListBox(ListBoxWaitress, waiterTextPickGlas);
-                            Thread.Sleep(3000);
+                            Thread.Sleep(plockaGlasSek * 1000);
 
                             string waiterTextDishGlas = $"{counterWaiter}_Diskar glas och ställer i baren";
                             counterWaiter++;
                             SafeInsertTextToListBox(ListBoxWaitress, waiterTextDishGlas);
-                            Thread.Sleep(3000);
+                            Thread.Sleep(diskaGlasSek * 1000);
                             antalGlas++;
                             SafeSetTextToTextBox(TextBoxAntalGlas, antalGlas.ToString());
                             string antalGlasText = $"Det finns {antalGlas} antal glas i hyllan";
@@ -335,38 +347,43 @@ namespace PeppesBodegaBar
 
         void ClosePub()
         {
+            /*
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirm close the pub!", System.Windows.MessageBoxButton.YesNo);
 
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                openBarStatus = false;
-                pauseTaskGuest = false;
-                pauseTaskBartender = false;
-                pauseTaskWaiter = false;
-                Thread.Sleep(10000);
-                Dispatcher.Invoke(() =>
-                {
-                    ButtonPauseGuest.IsEnabled = false;
-                    ButtonPauseBartender.IsEnabled = false;
-                    ButtonPauseWaiter.IsEnabled = false;
-                    ButtonOpenCloseBar.IsEnabled = false;
-                    ButtoStopTasks.IsEnabled = false;
-                    TextBoxNrGuest.Text = "1";
-                    TextBoxTimeGuest.Text = "";
-                    //TextBoxAntalGlas.Text = 
-                    //TextBoxAntalStolar.Text =
-                    TextBoxOpenBarInSek.Text = "";
-                    ListBoxGuest.Items.Clear();
-                    ListBoxBartender.Items.Clear();
-                    ListBoxWaitress.Items.Clear();
+            */
+            StartSetting startsetting = new StartSetting();
+            bouncherWork = false;
+            openBarStatus = false;
 
-                    ButtonOpenCloseBar.Content = "Baren stängd!";
+            //if (queBarLeave.Count == 0)
+            //{
+            Dispatcher.Invoke(() =>
+            {
+                ButtonPauseGuest.IsEnabled = false;
+                ButtonPauseBartender.IsEnabled = false;
+                ButtonPauseWaiter.IsEnabled = false;
+                ButtonOpenCloseBar.IsEnabled = false;
+                ButtoStopTasks.IsEnabled = false;
+                TextBoxNrGuest.Text = "1";
+                TextBoxTimeGuest.Text = "";
+                TextBoxAntalGlas.Text = "8";
+                TextBoxAntalStolar.Text = "9";
+                TextBoxPlockaGlasTid.Text = "10";
+                TextBoxDiskaGlasTid.Text = "15";
 
-                });
-            }
+                //TextBoxAntalGlas.Text = startsetting.AntalGlasStart;
+                //TextBoxAntalGlas.Text = 
+                //TextBoxAntalStolar.Text =
+                TextBoxOpenBarInSek.Text = "";
+                ListBoxGuest.Items.Clear();
+                ListBoxBartender.Items.Clear();
+                ListBoxWaitress.Items.Clear();
 
+                ButtonOpenCloseBar.Content = "Baren är stängd!";
 
-
+            });
         }
 
         private void SafeInsertTextToListBox(ListBox lb, string str)
@@ -421,8 +438,6 @@ namespace PeppesBodegaBar
         private void updateTimeLeftTextBox(int sekBarOpenLeft)
         {
             SafeSetTextToTextBox(TextBoxOpenBarInSek, sekBarOpenLeft.ToString());
-            // Bartender bartender = new Bartender();
-            //bartender.Work(sekBarOpenLeft);
         }
 
         private void ButtonStopTasks_Click(object sender, RoutedEventArgs e)
@@ -430,30 +445,24 @@ namespace PeppesBodegaBar
             if (pauseAllTask)
             {
                 ButtoStopTasks.Content = "Fortsätt...";
+                bouncherWork = false;
                 openBarStatus = false;
                 pauseTaskGuest = false;
                 pauseTaskBartender = false;
                 pauseTaskWaiter = false;
-                pauseAllTask = false;
+
             }
             else
             {
 
                 ButtoStopTasks.Content = "Stoppa alla trådar!";
-                openBarStatus = false;
+                bouncherWork = true;
+                openBarStatus = true;
                 pauseTaskGuest = true;
                 pauseTaskBartender = true;
                 pauseTaskWaiter = true;
-                pauseAllTask = true;
-
             }
-
-            openBarStatus = false;
-            pauseTaskGuest = false;
-            pauseTaskBartender = false;
-            pauseTaskWaiter = false;
-
-
+            pauseAllTask = !pauseAllTask;
         }
 
         private void ButtonPauseBartender_Click(object sender, RoutedEventArgs e)
@@ -462,7 +471,6 @@ namespace PeppesBodegaBar
             {
                 ButtonPauseBartender.Content = "Fortsätt";
                 pauseTaskBartender = false;
-
             }
             else
             {
@@ -477,7 +485,6 @@ namespace PeppesBodegaBar
             {
                 ButtonPauseWaiter.Content = "Fortsätt";
                 pauseTaskWaiter = false;
-
             }
             else
             {

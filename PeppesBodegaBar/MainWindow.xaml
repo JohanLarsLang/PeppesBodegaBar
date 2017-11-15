@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PeppesBodegaBar"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1100">
-    <Grid x:Name="PeppesBodegaBar" Margin="0,-2,-70.4,-2.6" HorizontalAlignment="Left" Width="1164" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+    <Grid x:Name="PeppesBodegaBar" Margin="0,-2,-70.4,-2.6" HorizontalAlignment="Left" Width="1164" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="721*"/>
             <ColumnDefinition Width="33*"/>
@@ -33,10 +33,14 @@
         <TextBox x:Name="TextBoxAntalGlas" HorizontalAlignment="Left" Height="23" Margin="287,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
         <Label x:Name="LabelAntalGlas" Content="" HorizontalAlignment="Left" Margin="818,115,0,0" VerticalAlignment="Top" Width="218"/>
         <Button x:Name="ButtonPauseWaiter" Content="Pausa" HorizontalAlignment="Left" Margin="558,276,0,0" VerticalAlignment="Top" Width="243" FontWeight="Bold" FontSize="10" Height="23" IsEnabled="False" Click="ButtonPauseWaiter_Click"/>
-        <TextBox x:Name="TextBoxAntalStolar" HorizontalAlignment="Left" Height="23" Margin="558,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
-        <Label x:Name="LabelAntalStolarText" Content="Antal stolar i baren" HorizontalAlignment="Left" Margin="596,314,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
         <Label x:Name="LabelAntalStolar" Content="" HorizontalAlignment="Left" Margin="818,157,0,0" VerticalAlignment="Top" Width="218"/>
-        <Label x:Name="LabelBarName" Content="Peppés Bodega Bar" HorizontalAlignment="Left" Margin="338,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Comic Sans MS" FontSize="20" Foreground="#FF2F549D" Width="218"/>
+        <Label x:Name="LabelBarName" Content="Peppés Bodega Bar" HorizontalAlignment="Left" Margin="338,4,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Comic Sans MS" FontSize="24" Foreground="#FF2F549D" Width="245"/>
+        <Label x:Name="LabelAntalStolarText" Content="Antal stolar&#xA;i baren" HorizontalAlignment="Left" Margin="581,311,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <TextBox x:Name="TextBoxPlockaGlasTid" HorizontalAlignment="Left" Height="23" Margin="645,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
+        <Label x:Name="LabelPlockaGlasTidText" Content="Plocka glas&#xA;från bord tid" HorizontalAlignment="Left" Margin="669,314,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <TextBox x:Name="TextBoxDiskaGlasTid" HorizontalAlignment="Left" Height="23" Margin="739,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.747,0.435"/>
+        <Label x:Name="LabelDiskaGlasTidText" Content="Diska glas och&#xA;ställa i baren tid" HorizontalAlignment="Left" Margin="769,314,0,0" VerticalAlignment="Top" FontSize="10" Height="36"/>
+        <TextBox x:Name="TextBoxAntalStolar" HorizontalAlignment="Left" Height="23" Margin="553,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="28"/>
 
     </Grid>
 </Window>
