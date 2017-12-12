@@ -13,6 +13,7 @@ namespace PeppesBodegaBar
 
         public Bartender()
         {
+            /*
             bool alaive = true;
 
             Task.Run(() =>
@@ -30,6 +31,7 @@ namespace PeppesBodegaBar
 
             });
 
+    */
         }
         public void Work(int sekLeftBarOpen)
         {

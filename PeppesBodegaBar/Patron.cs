@@ -20,7 +20,10 @@ namespace PeppesBodegaBar
 
         public Patron(string name)
         {
+            
             Name = name;
+
+            /*
             bool alaive = true;
 
             Task.Run(() =>
@@ -35,6 +38,9 @@ namespace PeppesBodegaBar
                 }
                 
             });
+            */
+
+    
 
         }
     }
